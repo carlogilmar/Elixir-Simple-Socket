@@ -10,6 +10,7 @@ defmodule SimpleexampleWeb.ExampleChannel do
 
   def handle_in("example:broadcast", payload, socket) do
     Logger.info ":: Example:Broadcast receive a message!::"
+    broadcast! socket, "example:alert", payload
     {:noreply, socket}
   end
 
