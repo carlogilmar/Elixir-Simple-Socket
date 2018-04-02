@@ -55,8 +55,16 @@ socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("example", {})
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+  channel.push('example:broadcast', {message:"Hello Phoenix!"})
+
+ // Channel para recibir mensajes
+ channel.on("example:alert", msg => {
+  alert("Can you see me?!!!!")
+ })
 
 export default socket
